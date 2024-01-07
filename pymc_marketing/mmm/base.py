@@ -1050,9 +1050,9 @@ class BaseMMM(ModelBuilder):
 
         fig.suptitle("Direct response curves", fontsize=16)
         return fig
-    
+
     def compute_adstocked_channels(
-            self, 
+            self,
             channels : List[str],
             adstock_params : List[str] = ['alpha', 'lam'],
             adstock_func : Any = geometric_adstock,
@@ -1076,11 +1076,12 @@ class BaseMMM(ModelBuilder):
             for channel in channels:
                 idx = self.channel_columns.index(channel)
                 self.X[f'{channel}_adstocked'] = adstock[:, idx]
-    
+
+
     def plot_adstocked_contribution_curves(
-            self, 
-            show_fit : bool = True, 
-            xlim_max=None, 
+            self,
+            show_fit : bool = True,
+            xlim_max=None,
             adstock_params : List[str] = ['alpha'],
             adstock_func : Any = geometric_adstock,
             method: str = "sigmoid",
@@ -1100,7 +1101,7 @@ class BaseMMM(ModelBuilder):
             The maximum value to be plot on the X-axis. If not provided, the maximum value in the data will be used.
         method : str, optional
             The method used to fit the contribution & spent non-linear relationship. It can be either 'sigmoid' or 'michaelis-menten'. Defaults to 'sigmoid'.
-        
+
         Returns
         -------
         plt.Figure
@@ -1161,7 +1162,7 @@ class BaseMMM(ModelBuilder):
             normalize=normalize,
             axis=axis,
         )
-            
+
         for i, (ax, channel) in enumerate(axes_channels):
             if self.X is not None:
                 x = self.X[f'{channel}_adstocked'].to_numpy()
@@ -1194,7 +1195,7 @@ class BaseMMM(ModelBuilder):
 
         fig.suptitle("Adstocked response curves", fontsize=16)
         return fig
-       
+
     def _get_distribution(self, dist: Dict) -> Callable:
         """
         Retrieve a PyMC distribution callable based on the provided dictionary.
@@ -1412,3 +1413,4 @@ class BaseMMM(ModelBuilder):
 
 class MMM(BaseMMM, ValidateTargetColumn, ValidateDateColumn, ValidateChannelColumns):
     pass
+
